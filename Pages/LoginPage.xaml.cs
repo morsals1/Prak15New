@@ -37,6 +37,7 @@ namespace Prak15Mensh.Pages
         public LoginPage()
         {
             InitializeComponent();
+            
         }
 
         private void ManagerIn(object sender, RoutedEventArgs e)
