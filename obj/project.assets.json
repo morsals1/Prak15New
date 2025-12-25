@@ -4865,11 +4865,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\st310-12\\Documents\\MenshikovAll\\Prak15V2\\Prak15\\Prak15Mensh.csproj",
+      "projectUniqueName": "C:\\Users\\st310-12\\Documents\\MenshikovAll\\pPrak15Clone\\Prak15Mensh.csproj",
       "projectName": "Prak15Mensh",
-      "projectPath": "C:\\Users\\st310-12\\Documents\\MenshikovAll\\Prak15V2\\Prak15\\Prak15Mensh.csproj",
+      "projectPath": "C:\\Users\\st310-12\\Documents\\MenshikovAll\\pPrak15Clone\\Prak15Mensh.csproj",
       "packagesPath": "C:\\Users\\st310-12\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\st310-12\\Documents\\MenshikovAll\\Prak15V2\\Prak15\\obj\\",
+      "outputPath": "C:\\Users\\st310-12\\Documents\\MenshikovAll\\pPrak15Clone\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

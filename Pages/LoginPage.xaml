@@ -48,7 +48,7 @@
                             Foreground="#333"/>
                 </StackPanel>
                 
-                <TextBlock Text="Пин-код менеджера: 1111" 
+                <TextBlock Text="Пин-код менеджера: 1234" 
                            FontSize="12" 
                            Foreground="#666"
                            HorizontalAlignment="Center"

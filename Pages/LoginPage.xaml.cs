@@ -22,7 +22,7 @@ namespace Prak15Mensh.Pages
 {
     public partial class LoginPage : Page
     {
-        private string _password = "1111";
+        private string _password = "1234";
 
         public string password 
         {

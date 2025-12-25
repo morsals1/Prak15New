@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mGZco5aFk/I=",
+  "dgSpecHash": "ifz5rRs7vFs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\st310-12\\Documents\\MenshikovAll\\Prak15V2\\Prak15\\Prak15Mensh.csproj",
+  "projectFilePath": "C:\\Users\\st310-12\\Documents\\MenshikovAll\\pPrak15Clone\\Prak15Mensh.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\st310-12\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\st310-12\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
