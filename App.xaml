@@ -1,0 +1,39 @@
+﻿<Application x:Class="Prak15Mensh.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Prak15Mensh"
+             xmlns:converters="clr-namespace:Prak15Mensh.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime"/>
+
+                <ResourceDictionary>
+                    <SolidColorBrush x:Key="MaterialDesign.Brush.Primary" Color="#00C4B4"/>
+                    <SolidColorBrush x:Key="MaterialDesign.Brush.Primary.Foreground" Color="#fff"/>
+                    <SolidColorBrush x:Key="MaterialDesign.Brush.Secondary" Color="#dfeaeb" />
+                    <SolidColorBrush x:Key="MaterialDesign.Brush.Secondary.Foreground" Color="#fff"/>
+                    <SolidColorBrush x:Key="DopCollor" Color="#00b4c4"/>
+                    <SolidColorBrush x:Key="AllBackgraund" Color="#dfeaeb"/>
+                    <SolidColorBrush x:Key="SmallIslandWarning" Color="#ffd129"/>
+                    <Style TargetType="TextBlock" x:Key="HeadderText">
+                        <Setter Property="FontSize" Value="25" />
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+
+                    <Style x:Key="ErrorTextStyle" TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="Red"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="Margin" Value="0,2,0,5"/>
+                    </Style>
+                </ResourceDictionary>
+                <ResourceDictionary Source="/Styles/Borders.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

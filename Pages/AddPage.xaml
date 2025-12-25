@@ -1,0 +1,218 @@
+﻿<Page x:Class="Prak15Mensh.Pages.AddPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Prak15Mensh.Pages"
+      xmlns:converters="clr-namespace:Prak15Mensh.Converters"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:validation="clr-namespace:Prak15Mensh.ValidationRules"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Создание/Изменение товара">
+
+    <Page.Resources>
+        <converters:BorderConventer x:Key="cBorder"/>
+        <converters:DateOnlyToDateTimeConverter x:Key="DateConverter"/>
+    </Page.Resources>
+
+    <Grid Background="#dfeaeb" Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,5,0">
+            <Label FontSize="16" FontWeight="Bold">Основная информация</Label>
+
+            <StackPanel Margin="0,10,0,0">
+                <Label>Название товара</Label>
+                <TextBox materialDesign:HintAssist.Hint="Введите название"
+                         Style="{StaticResource TextBoxErrorStyle}">
+                    <TextBox.Text>
+                        <Binding Path="MainProduct.Name" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validation:ProductNameValidationRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0">
+                <Label>Описание</Label>
+                <TextBox materialDesign:HintAssist.Hint="Введите описание" 
+                         AcceptsReturn="True" 
+                         TextWrapping="Wrap" 
+                         Height="60" 
+                         Style="{StaticResource TextBoxErrorStyle}">
+                    <TextBox.Text>
+                        <Binding Path="MainProduct.Description" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <validation:ProductDescriptionValidationRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0">
+                <Label>Категория</Label>
+                <ComboBox ItemsSource="{Binding Categories}" 
+                          DisplayMemberPath="Name" 
+                          SelectedValuePath="Id" 
+                          Style="{StaticResource ComboBoxErrorStyle}"
+                          SelectionChanged="CategoryComboBox_SelectionChanged">
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Tag" Value="{Binding Id}"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                    <ComboBox.SelectedValue>
+                        <Binding Path="MainProduct.CategoryId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredIdValidationRule FieldName="Категория" ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedValue>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0">
+                <Label>Бренд</Label>
+                <ComboBox ItemsSource="{Binding Brands}" 
+                          DisplayMemberPath="Name" 
+                          SelectedValuePath="Id"
+                          Style="{StaticResource ComboBoxErrorStyle}">
+                    <ComboBox.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Tag" Value="{Binding Id}"/>
+                        </Style>
+                    </ComboBox.ItemContainerStyle>
+                    <ComboBox.SelectedValue>
+                        <Binding Path="MainProduct.BrandId" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validation:RequiredIdValidationRule FieldName="Бренд" ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.SelectedValue>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,0,0,0">
+            <Label FontSize="16" FontWeight="Bold">Дополнительная информация</Label>
+
+            <StackPanel Margin="0,10,0,0">
+                <Label>Цена</Label>
+                <TextBox materialDesign:HintAssist.Hint="0.00" 
+                         Style="{StaticResource TextBoxErrorStyle}" 
+                         PreviewTextInput="PriceTextBox_PreviewTextInput">
+                    <TextBox.Text>
+                        <Binding Path="MainProduct.Price" UpdateSourceTrigger="PropertyChanged" StringFormat="{}{0:F2}" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validation:PriceValidationRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0">
+                <Label>Количество на складе</Label>
+                <TextBox materialDesign:HintAssist.Hint="0"
+                         Style="{StaticResource TextBoxErrorStyle}">
+                    <TextBox.Text>
+                        <Binding Path="MainProduct.Stock" UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validation:StockValidationRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0">
+                <Label>Рейтинг товара</Label>
+                <TextBox materialDesign:HintAssist.Hint="0.0 - 5.0" 
+                         Style="{StaticResource TextBoxErrorStyle}" 
+                         PreviewTextInput="RatingTextBox_PreviewTextInput" 
+                         LostFocus="RatingTextBox_LostFocus">
+                    <TextBox.Text>
+                        <Binding Path="MainProduct.Rating" UpdateSourceTrigger="PropertyChanged" StringFormat="{}{0:F1}" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validation:RatingValidationRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0">
+                <Label>Дата создания</Label>
+                <DatePicker Style="{StaticResource DatePickerErrorStyle}" 
+                            SelectedDateFormat="Short">
+                    <DatePicker.SelectedDate>
+                        <Binding Path="MainProduct.CreatedAt" UpdateSourceTrigger="PropertyChanged" Converter="{StaticResource DateConverter}" ValidatesOnDataErrors="True" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <validation:DateValidationRule ValidatesOnTargetUpdated="True"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0">
+                <Label>Теги</Label>
+                <Border BorderBrush="#CCCCCC" BorderThickness="1" Height="80">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListBox ItemsSource="{Binding Tags}" 
+                                 SelectionMode="Multiple" 
+                                 BorderThickness="0"
+                                 Background="Transparent">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding Name}" 
+                                              IsChecked="{Binding IsSelected, Mode=TwoWay}" 
+                                              Margin="2,3"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <Button x:Name="SaveButton" 
+                    Content="Сохранить" 
+                    Height="30" 
+                    Width="180"
+                    Background="#00C4B4"
+                    Foreground="White"
+                    Click="SaveProduct" 
+                    Margin="0,0,10,0"/>
+            <Button x:Name="DeleteButton" 
+                    Content="Удалить" 
+                    Height="30" 
+                    Width="120"
+                    Background="#dfeaeb"
+                    Foreground="#333"
+                    Click="DeleteProduct_Click" 
+                    Margin="0,0,10,0" 
+                    Visibility="Collapsed"/>
+            <Button Content="Назад" 
+                    Height="30" 
+                    Width="180"
+                    Margin="0,0,10,0"
+                    Background="#dfeaeb"
+                    Foreground="#333"
+                    Click="Back"/>
+        </StackPanel>
+    </Grid>
+</Page>

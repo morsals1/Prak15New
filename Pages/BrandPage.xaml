@@ -1,0 +1,148 @@
+﻿<Page x:Class="Prak15Mensh.Pages.BrandPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Prak15Mensh.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      Loaded="Page_Loaded"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Управление брендами">
+
+    <Grid Background="#dfeaeb" Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <Label>Поиск брендов</Label>
+            <TextBox x:Name="SearchTextBox" 
+                     Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" 
+                     materialDesign:HintAssist.Hint="Введите текст для поиска брендов"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,5,0">
+            <Label FontSize="16" FontWeight="Bold">Форма бренда</Label>
+
+            <StackPanel Margin="0,10,0,0">
+                <Label>Название бренда</Label>
+                <TextBox x:Name="NameTextBox" 
+                         Text="{Binding CurrentName, UpdateSourceTrigger=PropertyChanged}"  
+                         Height="30"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0">
+                <Label>Действия</Label>
+                <Button x:Name="SaveButton" 
+                        Content="Сохранить" 
+                        Height="30" 
+                        Background="#00C4B4"
+                        Foreground="White"
+                        Click="SaveButton_Click" 
+                        IsEnabled="{Binding IsValidName}"/>
+                <Button x:Name="BackButton" 
+                        Content="Назад" 
+                        Height="30" 
+                        Margin="0,20,0,0"
+                        Background="#dfeaeb"
+                        Foreground="#333"
+                        Click="BackButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+        
+        <materialDesign:ColorZone Grid.Row="1" Grid.Column="1" Mode="SecondaryMid">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="15,15,15,10">
+                    <Label FontSize="16" FontWeight="Bold">Список брендов</Label>
+                </StackPanel>
+
+                <ListView Grid.Row="1" x:Name="ItemsListView" 
+                          ItemsSource="{Binding FilteredBrands}" 
+                          SelectedItem="{Binding SelectedBrand, Mode=OneWay}" 
+                          MouseDoubleClick="ItemsListView_MouseDoubleClick"
+                          HorizontalContentAlignment="Stretch"
+                          Background="Transparent">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="0,0,0,1" BorderBrush="#CCCCCC" Padding="10,8">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock FontSize="14" FontWeight="Bold" Text="{Binding Name}" 
+                                                   Foreground="#333" Margin="0,0,0,2"/>
+                                        <TextBlock FontSize="12" Foreground="#666">
+                                            <Run Text="Идентификатор:"/>
+                                            <Run Text="{Binding Id}" FontWeight="SemiBold"/>
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Button Content="Изменить" 
+                                                Height="28" 
+                                                Padding="12,0"
+                                                Background="#00C4B4"
+                                                Foreground="White"
+                                                BorderThickness="0"
+                                                Click="EditButton_Click" 
+                                                Tag="{Binding}" 
+                                                Margin="0,0,8,0"/>
+                                        <Button Content="Удалить" 
+                                                Height="28" 
+                                                Padding="12,0"
+                                                Background="#dfeaeb"
+                                                Foreground="#333"
+                                                BorderThickness="1"
+                                                BorderBrush="#CCCCCC"
+                                                Click="DeleteButton_Click" 
+                                                Tag="{Binding}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <ContentPresenter/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#E3F2FD"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#F5F5F5"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </Grid>
+        </materialDesign:ColorZone>
+
+        <WrapPanel Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <TextBlock Text="{Binding ItemsCountText}" Margin="0,0,20,0"/>
+            <TextBlock Text="{Binding FilteredBrands.Count, StringFormat='{}Найдено: {0}'}"/>
+        </WrapPanel>
+    </Grid>
+</Page>
